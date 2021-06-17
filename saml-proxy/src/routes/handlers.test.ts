@@ -155,13 +155,13 @@ describe("samlLogin", () => {
   afterAll(() => {
     expect(mockResponse.render).toHaveBeenCalledWith("login_selection", {
       id_me_login_link:
-        "https://identityProviderUrl.com?SAMLRequest=fVDBqsJADDz7F2Xvte2KCMEWFA8KiuXZ9w7e1rroQputm1T0711XD76LOU3IzCSTKam26WDW8xl%2F9KXXxNGtbZAgDHLROwSryBCgajUB17CbbdYghyl0zrKtbSMiX4OF1xpUbCzm4szcESSJOWpkw%2FfS2avH7tc1w9q2QbFa5OIFiHq9QmKFnAuZyixOZZxNqmwE4xRktg%2B08r1ubvBo8PT9tsOLRLCsqjIut7tKRH%2FaUbjOE0QxfSaEsNt9ZP5uq4i0e0b0%2BuTD4N39%2F2TxAA%3D%3D&RelayState=",
+        "https://identityProviderUrl.com?SAMLRequest=fVDBqsJADDz7F2Xvte0KCsEWFA8KiuXZ9w7e1rroQputm1T0711XD76LOU3IzCSTKam26WDW8xl%2F9KXXxNGtbZAgDHLROwSryBCgajUB17CbbdYghyl0zrKtbSMiX4OF1xpUbCzm4szcESSJOWpkw%2FfS2avH7tc1w9q2QbFa5OIFiHq9QmKFnAuZyixOx3E2qWQGWQojuQ%2B08r1ubvBo8PT9tsOLRLCsqjIut7tKRH%2FaUbjOE0QxfSaEsNt9ZP5uq4i0e0b0%2BuTD4N39%2F2TxAA%3D%3D&RelayState=",
       dslogon_login_link:
-        "https://identityProviderUrl.com?SAMLRequest=fVDBbsIwDD3zF1XupW3QNMmiSJ04DImJCsoO3LI2GpFap8QuGn9PSDl0F3x6lt979vOSVNf2UAx8xr2%2BDJo4%2ButaJAiDXAwOwSoyBKg6TcA1HIqvLch5Cr2zbGvbisjXbO21BhUbi7k4M%2FcESWIajWz4Vjp79dgdXTuvbRcUm3UuRkA06A0SK%2BRcyFRmcSrj7L3KFvCWglycAq18rvsw2Bj8fX3bz0gi%2BKyqMi53h0pE39pRuM4TxGr5SAhht5tkfm2riLR7RPT6ZGLw7P5%2FcnUH&RelayState=",
+        "https://identityProviderUrl.com?SAMLRequest=fVDLCsJADDz7F2XvtQ9BIdiC4kFBsWj14G2tiy602bpJRf%2FedfWgF3OakJlJJmOSTd3CpOMLbtS1U8TBvamRwA8y0VkEI0kToGwUAVewnayWkPZjaK1hU5laBK56M6fVKFkbzMSFuSWIIn1SyJofhTU3h%2B3O1v3KNF6xmGXiDYg6tUBiiZyJNE6TMB6GyahME0hiGAwOnlZ81k01njSe%2F992fJMI5mVZhMV6W4pgryz56xxB5ONXQvC77Vfm%2F7aSSNlXRKePvgw%2B3e8n8yc%3D&RelayState=",
       mhv_login_link:
-        "https://identityProviderUrl.com?SAMLRequest=fVDBbsIwDD3zF1XupW3QNMmiSJ04DImJCsoO3LI2GpFap8QuGn9PSDl0F3x6lt979vOSVNf2UAx8xr2%2BDJo4%2ButaJAiDXAwOwSoyBKg6TcA1HIqvLch5Cr2zbGvbisjXbO21BhUbi7k4M%2FcESWIajWz4Vjp79dgdXTuvbRcUm3UuRkA06A0SK%2BRcyFRmcSrj7L3KFvCWglycAq18rvsw2Bj8fX3bz0gi%2BKyqMi53h0pE39pRuM4TxGr5SAhht5tkfm2riLR7RPT6ZGLw7P5%2FcnUH&RelayState=",
+        "https://identityProviderUrl.com?SAMLRequest=fVDLCsJADDz7F2XvtQ9BIdiC4kFBsWj14G2tiy602bpJRf%2FedfWgF3OakJlJJmOSTd3CpOMLbtS1U8TBvamRwA8y0VkEI0kToGwUAVewnayWkPZjaK1hU5laBK56M6fVKFkbzMSFuSWIIn1SyJofhTU3h%2B3O1v3KNF6xmGXiDYg6tUBiiZyJNE6TMB6GyahME0hiGAwOnlZ81k01njSe%2F992fJMI5mVZhMV6W4pgryz56xxB5ONXQvC77Vfm%2F7aSSNlXRKePvgw%2B3e8n8yc%3D&RelayState=",
       id_me_signup_link:
-        "https://identityProviderUrl.com?SAMLRequest=fVDBbsIwDD3zF1XupW3QNMmiSJ04DImJCsoO3LI2GpFap8QuGn9PSDl0F3x6lt979vOSVNf2UAx8xr2%2BDJo4%2ButaJAiDXAwOwSoyBKg6TcA1HIqvLch5Cr2zbGvbisjXbO21BhUbi7k4M%2FcESWIajWz4Vjp79dgdXTuvbRcUm3UuRkA06A0SK%2BRcyFRmcSrj7L3KFvCWglycAq18rvsw2Bj8fX3bz0gi%2BKyqMi53h0pE39pRuM4TxGr5SAhht5tkfm2riLR7RPT6ZGLw7P5%2FcnUH&RelayState=&op=signup",
+        "https://identityProviderUrl.com?SAMLRequest=fVDLCsJADDz7F2XvtQ9BIdiC4kFBsWj14G2tiy602bpJRf%2FedfWgF3OakJlJJmOSTd3CpOMLbtS1U8TBvamRwA8y0VkEI0kToGwUAVewnayWkPZjaK1hU5laBK56M6fVKFkbzMSFuSWIIn1SyJofhTU3h%2B3O1v3KNF6xmGXiDYg6tUBiiZyJNE6TMB6GyahME0hiGAwOnlZ81k01njSe%2F992fJMI5mVZhMV6W4pgryz56xxB5ONXQvC77Vfm%2F7aSSNlXRKePvgw%2B3e8n8yc%3D&RelayState=&op=signup",
     });
     expect(mockResponse.render).toHaveBeenCalledWith("verify", {
       id_me_login_link:
