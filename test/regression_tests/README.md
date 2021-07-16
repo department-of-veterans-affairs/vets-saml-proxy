@@ -9,7 +9,7 @@ export CLIENT_ID={ client id }
 export USER_PASSWORD={ user password }
 export AUTHORIZATION_URL={ ex. https://sandbox-api.va.gov/oauth2 }
 export VALID_USER_EMAIL={ ex. va.api.user+idme.001@gmail.com }
-export ICN_ERROR_USER_EMAIL={ ex. va.api.user+idme.043@gmail.com }
+export ICN_ERROR_USER_EMAIL={ ex. va.api.user+idme.049@gmail.com }
 export HEADLESS={ 0 (false) or 1 (true) } // note: this value only is important for local runs
 ```
 

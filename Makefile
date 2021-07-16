@@ -87,6 +87,21 @@ test:
 		$(REPOSITORY)/$(NAMESPACE)/$(IMAGE):$(TAG) \
 		npm run test:ci
 
+## regression: Regression Tests
+.PHONY: regression
+regression:
+	@:$(call check_defined, IMAGE, IMAGE variable should be saml-proxy-tests)
+	docker run \
+		-v "/var/run/docker.sock:/var/run/docker.sock" \
+		--rm $(REPOSITORY)/$(NAMESPACE)/$(IMAGE):$(TAG) \
+		--saml-proxy-url=$(SAML_PROXY_URL) \
+		--client-id=$(CLIENT_ID) \
+		--idp=$(IDP) \
+		--authorization-url=$(AUTHORIZATION_URL) \
+		--user-password=$(USER_PASSWORD) \
+		--valid-user=$(VALID_USER_EMAIL) \
+		--icn-error-user=$(ICN_ERROR_USER_EMAIL)
+
 ## pull: 	Pull an image to ECR
 .PHONY: pull
 pull:

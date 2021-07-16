@@ -26,15 +26,30 @@ version: 0.2
 env:
   shell: bash
   variables:
+   # Honor Docker ignore at folder level
+    DOCKER_BUILDKIT: 1
     # These are the default deploy environments
     ENVIRONMENTS: "dev staging"
     # These are the deployable environments
     DEPLOYABLE_ENVIRONMENTS: "dev staging sandbox prod"
     # Variables needed for ecs deployment
     AWS_APP_NAME: "ecs-saml-proxy"
+    IMAGE: "saml-proxy"
   parameter-store:
+    # For pulling docker images
+    DOCKER_USERNAME: "/dvp/devops/DOCKER_USERNAME"
+    DOCKER_PASSWORD: "/dvp/devops/DOCKER_PASSWORD"
     # SLACK_WEBHOOK should be a webhook that posts to the Slack channel you want notifications to go to
     SLACK_WEBHOOK: "/dvp/devops/codebuild_slack_webhook_lighthouse"
+    # Values for regression tests
+    CLIENT_ID: "/dvp/common/ecs-saml-proxy/codebuild/client_id"
+    DEV_IDP: "/dvp/common/ecs-saml-proxy/codebuild/dev_idp"
+    SANDBOX_IDP: "/dvp/common/ecs-saml-proxy/codebuild/sandbox_idp"
+    STAGING_IDP: "/dvp/common/ecs-saml-proxy/codebuild/staging_idp"
+    AUTHORIZATION_URL: "/dvp/common/ecs-saml-proxy/codebuild/authorization_url"
+    USER_PASSWORD: "/dvp/common/ecs-saml-proxy/codebuild/user_password"
+    VALID_USER_EMAIL: "/dvp/common/ecs-saml-proxy/codebuild/valid_user_email"
+    ICN_ERROR_USER_EMAIL: "/dvp/common/ecs-saml-proxy/codebuild/icn_error_user_email"
 phases:
   pre_build:
     commands:
@@ -78,6 +93,33 @@ phases:
             --tag ${DEPLOY_TAG} \
             --timeout 1200 || exit 1
             slackpost.sh -t success "Deployed SAML Proxy to ${env}."
+          if [[ ${env} != prod ]]; then
+            if [[ ${env} = dev ]]; then
+              IDP=${DEV_IDP}
+            elif [[ ${env} = sandbox ]]; then
+              IDP=${SANDBOX_IDP}
+            elif [[ ${env} = stagin ]]; then
+              IDP=${STAGING_IDP}
+            fi
+            echo Logging into ECR
+            make login
+            echo Logging into Docker Hub
+            echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+            echo Running regression tests.
+            make regression \
+              TAG=${DEPLOY_TAG} \
+              IMAGE=${IMAGE}-tests \
+              SAML_PROXY_URL=https://${env}-api.va.gov \
+              CLIENT_ID=${CLIENT_ID} \
+              IDP=${IDP} \
+              AUTHORIZATION_URL=${AUTHORIZATION_URL} \
+              USER_PASSWORD=${USER_PASSWORD} \
+              VALID_USER_EMAIL=${VALID_USER_EMAIL} \
+              ICN_ERROR_USER_EMAIL=${ICN_ERROR_USER_EMAIL}
+            if [[ $? -gt 0 ]]; then
+              slackpost.sh -t warning "Some regression tests failed."
+            fi
+          fi
         done
   post_build:
     commands:
